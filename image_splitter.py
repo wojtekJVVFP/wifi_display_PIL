@@ -2,6 +2,7 @@ from websocket_devices import Ws_devices, devices
 from image_ops import fit_to_screen, calc_scaled_resolution
 from PIL import ImageOps, Image
 import os
+from itertools import chain
 
 class Image_split():
     def __init__(self):
@@ -9,22 +10,29 @@ class Image_split():
 
 #device_order = [3, 6, 7, 5]
 #device_order = [0]
-device_order = [0, 1]
 def image_split(image, base_dev_no):
+    device_layout = [[0]] #how the devices are located
+
     base_disp = devices[base_dev_no].disp_data
     curr_pos = [0,0] #current crop point (left upper corner)
     images = []
-    for dev_no in device_order:
-        device = devices[dev_no]
-        dev_res = device.disp_data.resolution
-        scaled_res = calc_scaled_resolution(device.disp_data, base_disp)
-        print(device.disp_data.resolution)
-        print(scaled_res)
-        cropped_image = image.crop((curr_pos[0], curr_pos[1], curr_pos[0]+scaled_res[0], curr_pos[1]+scaled_res[1]))
-        images.append(cropped_image)
-        #cropped_image.show()
-        curr_pos[0] = curr_pos[0] + scaled_res[0]
-    return images
+    points = [[]] #list of points
+    point[0].append(curr_pos)
+    points.append((curr_pos))
+    for row in range(len(device_layout)):
+        for dev_no in device_layout[row]:
+            device = devices[dev_no]
+            dev_res = device.disp_data.resolution
+            scaled_res = calc_scaled_resolution(device.disp_data, base_disp)
+            print(device.disp_data.resolution)
+            print(scaled_res)
+            cropped_image = image.crop((curr_pos[0], curr_pos[1], curr_pos[0]+scaled_res[0], curr_pos[1]+scaled_res[1]))
+            images.append(cropped_image)
+            #cropped_image.show()
+            curr_pos[0] = curr_pos[0] + scaled_res[0]
+            points.append((curr_pos))
+    device_order = list(chain.from_iterable(device_layout)) #flat version of devide_layout
+    return device_order, images
 
         #ret = ImageOps.scale(cropped_image, fit_to_screen(base_disp, device.disp_data))
 

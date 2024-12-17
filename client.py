@@ -1,14 +1,12 @@
 from websocket_devices import Ws_devices, devices
 from PIL import Image
-import numpy as np
-import pickle
-from image_splitter import image_split, device_order
+from image_splitter import image_split
 from message_generator import send_surface, send_message, image_to_message, message_to_array
-import time
 import json
 import os
+import itertools
 
-DEVICE_NO = 1
+DEVICE_NO = 0
 DEBUG_MESSAGE = False
 local_device = devices[DEVICE_NO]
 
@@ -33,17 +31,15 @@ target_devices.append(devices[1])
 
 path = os.path.join('obrazy', 'tram1.jpg')
 image = Image.open(path)
-images = image_split(image, 0)
+dev_order, images = image_split(image, 0)
 
-i=0
-for im in images:
+for dev, im in zip(dev_order, images):
     json_message = image_to_message(im) #spakowanie do danej typu dict i do json
     if DEBUG_MESSAGE:
         print(json_message)
     #dim3 = message_to_array(json_message)
     #send_message(json_message, local_device)
-    send_message(json_message, devices[i])
-    i += 1
+    send_message(json_message, devices[dev])
 #send_message('hello', local_device)
 
 # for i in test_images:

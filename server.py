@@ -1,3 +1,5 @@
+#14.12.2024 20:13
+
 import json
 import asyncio
 import websockets
@@ -35,7 +37,7 @@ async def ui():
     global image_pil    #do przekazywania obiektu obrazu pil
 
     # # Create a photoimage object of the image in the path
-    im = Image.open(os.path.join('obrazy', 'dodge2.bmp'))
+    im = Image.open(os.path.join('obrazy', 'test_cz.bmp'))
 
     image_tk_obj = ImageTk.PhotoImage(im)
     #test2 = ImageTk.PhotoImage(im2)
@@ -46,7 +48,7 @@ async def ui():
 
     root.protocol("WM_DELETE_WINDOW", lambda: window_close(root))
 
-    label1 = ttk.Label(frm, image=image_tk_obj)
+    label1 = ttk.Label(frm)#image=image_tk_obj
     label1.grid(column=0, row=0)
 
     ttk.Button(frm, text='Quit', command=lambda: quit_command(root)).grid(column=0, row=1)
