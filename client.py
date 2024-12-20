@@ -23,15 +23,14 @@ BLUE = (0, 0, 255)
 #     prost = pg.Rect(i*60, i*70, 200, 400)
 #     pg.draw.rect(obr, BLACK, prost, width=4)
 
-target_devices = []
-target_devices.append(devices[0])
-target_devices.append(devices[1])
+# target_devices = []
+# target_devices.append(devices[1])
 
 #send_surface(obr, target_device)
 
 path = os.path.join('obrazy', 'tram1.jpg')
 image = Image.open(path)
-dev_order, images = image_split(image, 0)
+dev_order, images = image_split(image, 3)
 
 for dev, im in zip(dev_order, images):
     json_message = image_to_message(im) #spakowanie do danej typu dict i do json

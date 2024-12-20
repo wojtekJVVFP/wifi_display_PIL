@@ -1,4 +1,4 @@
-#14.12.2024 20:13
+#20.12.2024 20:13
 
 import json
 import asyncio
@@ -37,9 +37,9 @@ async def ui():
     global image_pil    #do przekazywania obiektu obrazu pil
 
     # # Create a photoimage object of the image in the path
-    im = Image.open(os.path.join('obrazy', 'test_cz.bmp'))
+    #im = Image.open(os.path.join('obrazy', 'test_cz.bmp'))
 
-    image_tk_obj = ImageTk.PhotoImage(im)
+    #image_tk_obj = ImageTk.PhotoImage(im)
     #test2 = ImageTk.PhotoImage(im2)
     #imTk = ImageTk.PhotoImage(image_split(im2, 0))
 

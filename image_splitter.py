@@ -11,26 +11,49 @@ class Image_split():
 #device_order = [3, 6, 7, 5]
 #device_order = [0]
 def image_split(image, base_dev_no):
-    device_layout = [[0]] #how the devices are located
+    device_layout = [[1, 3],
+                     [8]] #how the devices are located
 
     base_disp = devices[base_dev_no].disp_data
-    curr_pos = [0,0] #current crop point (left upper corner)
+    start_pos = [0,0] #current crop point (left upper corner)
     images = []
-    points = [[]] #list of points
-    point[0].append(curr_pos)
-    points.append((curr_pos))
+    points = [] #list of points
+
+
     for row in range(len(device_layout)):
-        for dev_no in device_layout[row]:
+        points.append([])
+        for i, dev_no in enumerate(device_layout[row]):
             device = devices[dev_no]
             dev_res = device.disp_data.resolution
             scaled_res = calc_scaled_resolution(device.disp_data, base_disp)
             print(device.disp_data.resolution)
             print(scaled_res)
-            cropped_image = image.crop((curr_pos[0], curr_pos[1], curr_pos[0]+scaled_res[0], curr_pos[1]+scaled_res[1]))
+
+            image_upper =  start_pos[1]#
+            image_left = start_pos[0]#
+
+            if row == 0:
+                if i == 0:  #row = 0, i=0
+                    points[row].append([scaled_res[0]+start_pos[0], scaled_res[1]+start_pos[1]])    #first column with x=0
+                else:   #row=0, i>0
+                    points[row].append([points[row][i-1][0] + scaled_res[0], scaled_res[1]+start_pos[1]])
+                    image_left = points[row][i - 1][0]
+            else:   #row > 0
+                if i == 0:  #row > 0, i=0
+                    points[row].append([scaled_res[0]+start_pos[0], scaled_res[1]+points[row-1][i][1]])    #first column with x=0
+                else:   #row > 0, i>0
+                    points[row].append([scaled_res[0]+points[row][i-1][0], scaled_res[1]+points[row-1][i][1]])
+                    image_left = points[row][i - 1][0]
+                image_upper =  points[row-1][i][1]
+
+            #image_left = points[row][i-1][0]
+            image_right = points[row][i][0]
+            image_lower = points[row][i][1]
+
+            cropped_image = image.crop((image_left, image_upper, image_right, image_lower))    #crop (left, upper, right, lower)
             images.append(cropped_image)
             #cropped_image.show()
-            curr_pos[0] = curr_pos[0] + scaled_res[0]
-            points.append((curr_pos))
+    print(points)
     device_order = list(chain.from_iterable(device_layout)) #flat version of devide_layout
     return device_order, images
 

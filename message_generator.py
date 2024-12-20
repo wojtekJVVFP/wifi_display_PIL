@@ -29,7 +29,6 @@ def send_surface(surf, target_ws_device):
 
 
 def image_to_message(image):
-    #str_image = pg.image.tostring(image, 'RGB')  # obrazki na telefony w formie bytes do wysłania
     image_dict = image_to_bytes(image)
     str_image = image_dict['image_data']
     #błąd bytes_image = str_image.encode()
@@ -39,11 +38,6 @@ def image_to_message(image):
         "height": image_dict['height'],
         "image_data": list_image
     }
-    #obr_size_bytes = json.dumps(obr_size)
-    #beginning = len(obr_size_bytes)
-    #beginning_bytes = beginning.to_bytes(2, 'little')
-    #load = beginning_bytes + obr_size_bytes
-    #surface = pg.Surface((image.get_width, image.get_height,)
     json_image = json.dumps(message)
 
     return json_image
