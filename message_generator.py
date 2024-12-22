@@ -1,3 +1,4 @@
+import io
 import struct
 import pickle
 import asyncio
@@ -9,36 +10,30 @@ from PIL import Image, ImageTk
 def image_file_to_bytes(image_name: str):
     with Image.open(image_name) as im:
         return {'width': im.width, 'height': im.height, 'image_data':  im.tobytes()}
-def image_to_bytes(image):
-    return {'width': image.width, 'height': image.height, 'image_data':  image.tobytes()}
+def image_to_dict(image) -> dict:
+    image_bytesIO = io.BytesIO()
+    image.save(image_bytesIO, "JPEG")  # writing image to bytesIO object
+    image_bytes = image_bytesIO.getvalue()  # to bytes
+
+    image_list = list(image_bytes)
+    #image_list = list(image_.tobytes())
+    print('rozmiar image_list: ', len(image_list))
+    return {'width': image.width, 'height': image.height, 'image_data': image_list }
 def bytes_to_image(input: bytes, width: int, height: int) -> Image:
     return Image.frombytes('RGB', (width,height), input)
 
-def send_surface(surf, target_ws_device):
-    #messa = []
-    spak = pg.image.tostring(surf, 'RGB') # obrazki na telefony w formie bytes do wysłania
-
-    surf_size = (surf.get_width(), surf.get_height())
-    surf_size_bytes = pickle.dumps(surf_size)
-    beginning = len(surf_size_bytes)
-    beginning_bytes = beginning.to_bytes(2,'little')
-    load = beginning_bytes + surf_size_bytes
-    message = load + spak
-    #messa.append((local_device, message))
-    asyncio.run(ws_comm(message, target_ws_device))
-
-
 def image_to_message(image):
-    image_dict = image_to_bytes(image)
-    str_image = image_dict['image_data']
+    image_dict = image_to_dict(image)
+
+    #str_image = image_dict['image_data']
     #błąd bytes_image = str_image.encode()
-    list_image = list(str_image)
-    message = {
-        "width": image_dict['width'],
-        "height": image_dict['height'],
-        "image_data": list_image
-    }
-    json_image = json.dumps(message)
+    #list_image = list(str_image)
+    # message = {
+    #     "width": image_dict['width'],
+    #     "height": image_dict['height'],
+    #     "image_data": list_image
+    # }
+    json_image = json.dumps(image_dict)
 
     return json_image
 

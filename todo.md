@@ -8,6 +8,9 @@ Jest biblioteka, która przekształca bytes na dane binarne (struct), ale wydaje
 pygame
 
 Jak przekształcić surface do postaci możliwej do przesłania przez websockets tak żeby była możliwość przekstałcenia przez kod
-c++?
- - jak są ułożone dane odnośnie pikseli i kolorów w typie surface?
- - jak odkodować bytes po stronie c++, 
+c++? 
++ jak są ułożone dane odnośnie pikseli i kolorów w typie surface?
++ jak odkodować bytes po stronie c++, 
+
+- Pomiar czasu w python
+- Znaleźć miejsca gdzie program jest wolniejszy i zoptymalizować

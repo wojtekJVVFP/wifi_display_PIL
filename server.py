@@ -1,5 +1,6 @@
 #20.12.2024 20:13
 
+import io
 import json
 import asyncio
 import websockets
@@ -10,6 +11,7 @@ from image_ops import fit_to_screen
 import os
 from message_generator import image_to_message, message_to_array, bytes_to_image
 from image_splitter import *
+import time
 
 DEVICE_NO = 0
 BASE_DISP = 0   #number of device with the smallest dpi
@@ -74,14 +76,18 @@ async def send1(websocket):
         print(message)
         print("Wiadomość odebrana:")
         message_dict = json.loads(message)
-        image_array = message_dict["image_data"]
+        image_file_array = message_dict["image_data"]
+        image_file_bytes = bytes(image_file_array)
 
-        image_bytes = bytes(image_array)
+        image_bytesIO = io.BytesIO()
+        image_bytesIO.write(image_file_bytes)
+        image_base_pil = Image.open(image_bytesIO)
+
         width = message_dict["width"]
         height = message_dict["height"]
         print(width, height)
 
-        image_base_pil = bytes_to_image(image_bytes, width, height)
+        #image_base_pil = bytes_to_image(image_bytes, width, height)
         image_pil = ImageOps.scale(image_base_pil, fit_to_screen(devices[BASE_DISP].disp_data, devices[DEVICE_NO].disp_data))
         await asyncio.sleep(.05)
         image_update = True

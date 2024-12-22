@@ -23,6 +23,6 @@ devices.append(Ws_devices(ip='192.168.1.107', name='samsung J5 #1', greet='jeste
 devices.append(Ws_devices(ip='192.168.1.108', name='samsung xCover', greet='jestem xCover', isActive = False, resolution = (480, 800), dpi = 207))     #3
 devices.append(Ws_devices(ip='192.168.1.109', name='samsung J5 #2', greet='jestem J5 #2', isActive = False, resolution = (720, 1280)))    #4
 devices.append(Ws_devices(ip='192.168.1.110', name='Xiaomi Redmi Szczep', greet='Redmi Szczep', isActive = False, resolution = (720, 1280)))    #5
-devices.append(Ws_devices(ip='192.168.1.111', name='Xiaomi Redmi Bogd', greet='Redmi Bogd', isActive = False, resolution = (720, 1280)))    #6
+devices.append(Ws_devices(ip='192.168.1.111', name='Xiaomi Redmi Bogd', greet='Redmi Bogd', isActive = False, resolution = (720, 1280), dpi = 294))    #6
 devices.append(Ws_devices(ip='192.168.1.103', name='Galaxy Tab S7', greet='Tab S7', isActive = False, resolution = (2800, 1752), dpi = 226))    #7
 devices.append(Ws_devices(ip='192.168.1.115', name='LG G2 mini', greet='g2 mini', isActive = False, resolution = (540, 960), dpi = 234))    #8

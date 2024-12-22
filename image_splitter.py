@@ -11,8 +11,10 @@ class Image_split():
 #device_order = [3, 6, 7, 5]
 #device_order = [0]
 def image_split(image, base_dev_no):
-    device_layout = [[1, 3],
-                     [8]] #how the devices are located
+    #device_layout = [[1, 3],
+     #                [8, 6]] #how the devices are located
+    device_layout = [[0]]
+
 
     base_disp = devices[base_dev_no].disp_data
     start_pos = [0,0] #current crop point (left upper corner)
