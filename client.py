@@ -46,20 +46,18 @@ def diff(l:list) -> list:
 czasy = []
 dodaj_czas('pocz', czasy)
 
-path = os.path.join('obrazy', 'wes.jpg')   #tram1.jpg
+path = os.path.join('obrazy', 'linie.jpg')   #tram1.jpg
 image = Image.open(path)
 
-image_string = io.BytesIO()
-image.save(image_string, "JPEG")    #writing image to bytesIO object
-image_bytes = image_string.getvalue()   #to bytes
-
-secondary_image_io = io.BytesIO()   #receiving data from the bytes
-secondary_image_io.write(image_bytes)
-
-secondary_image = Image.open(secondary_image_io)
-
-
-print('image_bytes: ', len(image_bytes))
+# image_string = io.BytesIO()
+# image.save(image_string, "JPEG")    #writing image to bytesIO object
+# image_bytes = image_string.getvalue()   #to bytes
+#
+# secondary_image_io = io.BytesIO()   #receiving data from the bytes
+# secondary_image_io.write(image_bytes)
+#
+# secondary_image = Image.open(secondary_image_io)
+# print('image_bytes: ', len(image_bytes))
 
 dodaj_czas('przed image_split', czasy)
 
@@ -72,10 +70,6 @@ print('rozmiar image: ', len(images))
 
 
 for dev, im in zip(dev_order, images):
-
-
-
-
     json_message = image_to_message(im) #spakowanie do danej typu dict i do json
     print('rozmiar wiadomości: ', len(json_message))
     if DEBUG_MESSAGE:
@@ -91,10 +85,6 @@ for dev, im in zip(dev_order, images):
 #send_message('hello', local_device)
 print(czasy)
 diff(czasy)
-# for i in test_images:
-#     json_message = image_to_message(i) #spakowanie do danej typu dict i do json
-#     dim3 = message_to_array(json_message)
-#     send_message(json_message, local_device)
 
 
 
