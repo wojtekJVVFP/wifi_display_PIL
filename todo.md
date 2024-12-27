@@ -16,6 +16,10 @@ c++?
 - Znaleźć miejsca gdzie program jest wolniejszy i zoptymalizować
 -+ Zamieniono wymianę pociętych obiektów image (bmp) na wymianę w postaci pliku jpg (zmienne io.BytesIO)
 
+- Dodać obsługę wyjątku ConnectionRefusedError, gdy któreś urządzenie nie jest podłączone
+
+
 - Poprawa rozdzielczości urządzeń. W tej chwili nie uwzględniane są paski powiadomień i dolne klawisze dotykowe przez co źle się skalują obrazki
-- 
-- Wprowadzić obliczanie poprawek na ramki urządzeń. Fragment obrazka, który powinien być na ramce nie będzie wyświetlany, żeby zachować ciągłość obrazka
+ - ile pikseli zajmuje belka powidomień w urządzeniach? Należy przeliczyć ile zajmuje na każdym urządzeniu i zmniejszyć o tą wartość rozdzielczość 
++ Wprowadzić obliczanie poprawek na ramki urządzeń. Fragment obrazka, który powinien być na ramce nie będzie wyświetlany, żeby zachować ciągłość obrazka
+ +-Coś nie działa jeszcze poprawnie z tym mechanizmem, trzeba go poprawić i testować

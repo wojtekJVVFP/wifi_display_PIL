@@ -33,12 +33,12 @@ devices = []
 devices.append(Ws_devices(ip='localhost', name='lokalne', greet='jestem lokalne', isActive = True, resolution = (1000, 1000), dpi = 127, margins = (8,10,8,0)))               #0
 devices.append(Ws_devices(ip='192.168.1.117', name='samsung note 9', greet='jestem note 9', isActive = True, resolution = (1440, 2990), dpi = 514, margins = (3,9,3,6)))   #1
 devices.append(Ws_devices(ip='192.168.1.107', name='samsung J5 #1', greet='jestem J5 mamy', isActive = False, resolution = (720, 1280)))    #2
-devices.append(Ws_devices(ip='192.168.1.108', name='samsung xCover', greet='jestem xCover', isActive = False, resolution = (480, 800), dpi = 207, margins = (4,18,4,16)))     #3
+devices.append(Ws_devices(ip='192.168.1.108', name='samsung xCover', greet='jestem xCover', isActive = False, resolution = (480, 764), dpi = 207, margins = (4,18,4,16)))     #3
 devices.append(Ws_devices(ip='192.168.1.109', name='samsung J5 #2', greet='jestem J5 #2', isActive = False, resolution = (720, 1280)))    #4
-devices.append(Ws_devices(ip='192.168.1.110', name='Xiaomi Redmi Szczep', greet='Redmi Szczep', isActive = False, resolution = (720, 1280)))    #5
+devices.append(Ws_devices(ip='192.168.1.110', name='Xiaomi Redmi Szczep', greet='Redmi Szczep', isActive = False, resolution = (720, 1230)))    #5
 devices.append(Ws_devices(ip='192.168.1.111', name='Xiaomi Redmi Bogd', greet='Redmi Bogd', isActive = False, resolution = (720, 1280), dpi = 294, margins = (3,13,3,15)))    #6
 devices.append(Ws_devices(ip='192.168.1.103', name='Galaxy Tab S7', greet='Tab S7', isActive = False, resolution = (2800, 1752), dpi = 226))    #7
-devices.append(Ws_devices(ip='192.168.1.115', name='LG G2 mini', greet='g2 mini', isActive = False, resolution = (540, 960), dpi = 234, margins = (3,12,3,14)))    #8
+devices.append(Ws_devices(ip='192.168.1.115', name='LG G2 mini', greet='g2 mini', isActive = False, resolution = (540, 848), dpi = 234, margins = (3,12,3,14)))    #8
 
 #calculating pixel margins according to base display
 base_disp = devices[BASE_DISP].disp_data
@@ -47,4 +47,5 @@ for i in devices:
     print(i.disp_data.calc_margins)
 
 if __name__ == '__main__':
+    pass
     #print(devices[0].disp_data.calc_margins)

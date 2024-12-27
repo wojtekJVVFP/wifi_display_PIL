@@ -8,8 +8,8 @@ import json
 import os
 import itertools
 import time
+from disp_no import DEVICE_NO, BASE_DISP
 
-DEVICE_NO = 0
 DEBUG_MESSAGE = False
 local_device = devices[DEVICE_NO]
 
@@ -31,7 +31,7 @@ def diff(l:list) -> list:
             kom = "czas pomiędzy: " + l[i-1][0] + ', a: ' + l[i][0]
             kom_war = (kom, 1000*(l[i][1]-l[i-1][1]))
             dif.append(kom_war)
-            print(kom_war)
+            #print(kom_war)
     return dif
 
 # prost = pg.Rect(30,20,200,400)
@@ -46,7 +46,7 @@ def diff(l:list) -> list:
 czasy = []
 dodaj_czas('pocz', czasy)
 
-path = os.path.join('obrazy', 'linie.jpg')   #tram1.jpg
+path = os.path.join('obrazy', 'wes.jpg')   #tram1.jpg
 image = Image.open(path)
 
 # image_string = io.BytesIO()
@@ -61,7 +61,7 @@ image = Image.open(path)
 
 dodaj_czas('przed image_split', czasy)
 
-dev_order, images = image_split(image, 3)
+dev_order, images = image_split(image, BASE_DISP)
 
 dodaj_czas('przed for dev,im', czasy)
 

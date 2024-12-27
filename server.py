@@ -1,4 +1,4 @@
-#20.12.2024 20:13
+#27.12.2024 20:13
 
 import io
 import json
@@ -12,8 +12,7 @@ import os
 from message_generator import image_to_message, message_to_array, bytes_to_image
 from image_splitter import *
 import time
-from disp_no import *   #number of current and base display
-
+from disp_no import DEVICE_NO, BASE_DISP  #number of current and base display
 
 from websocket_devices import Ws_devices, devices
 local_device = devices[DEVICE_NO]
@@ -37,6 +36,7 @@ async def ui():
     root = tk.Tk()
     global image_update
     global image_pil    #do przekazywania obiektu obrazu pil
+    global window_size
 
     # # Create a photoimage object of the image in the path
     #im = Image.open(os.path.join('obrazy', 'test_cz.bmp'))
@@ -54,6 +54,8 @@ async def ui():
     label1.grid(column=0, row=0)
 
     ttk.Button(frm, text='Quit', command=lambda: quit_command(root)).grid(column=0, row=1)
+
+    window_size = (root.winfo_screenwidth(), root.winfo_screenheight())
 
     while True:
         if image_update:
@@ -73,6 +75,7 @@ async def send1(websocket):
     async for message in websocket:
         global image_pil
         global image_update
+        global window_size
         print("Wiadomość odebrana:")
 
         image_file_array = json.loads(message)
@@ -90,7 +93,9 @@ async def send1(websocket):
         return_data_dict = {
             'data': local_device.greet,
             'width': image_base_pil.width,
-            'height': image_base_pil.height
+            'height': image_base_pil.height,
+            'window_width': window_size[0],
+            'window_height': window_size[1]
         }
         await websocket.send(json.dumps(return_data_dict))
 
