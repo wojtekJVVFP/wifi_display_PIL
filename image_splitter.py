@@ -15,7 +15,7 @@ class Margins():
 #device_order = [3, 6, 7, 5]
 #device_order = [0]
 def image_split(image, base_dev_no):
-    device_layout = [[3, 1], [8, 6]]
+    device_layout = [[0]]
     #[[3, 8, 6, 1]]
                      #[3, 8]] #how the devices are located
     #device_layout = [[1]]
